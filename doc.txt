@@ -1,0 +1,10 @@
+
+/*
+In Terminal:
+cd C:\Users\User\API
+python -m http.server 8000
+
+What to searh in brouser
+http://localhost:8000/index.html
+https://app.swaggerhub.com/apis/KoraRiko/DoctorWho/1.0.0#/default
+*/

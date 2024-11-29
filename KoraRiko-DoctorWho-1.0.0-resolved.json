@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Doctor Who API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/KoraRiko/DoctorWho/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/send-message": {
+      "post": {
+        "summary": "Doctor Who killing Dalec using a screwdriver",
+        "operationId": "sendMessage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendmessage_body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Response from Dalec",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sendmessage_DoctorWho": {
+        "type": "object",
+        "properties": {
+          "toolName": {
+            "type": "string",
+            "example": "Sonic Screwdriver"
+          },
+          "action": {
+            "type": "string",
+            "example": "Shake"
+          },
+          "status": {
+            "type": "string",
+            "example": "Activated"
+          }
+        }
+      },
+      "sendmessage_body": {
+        "type": "object",
+        "properties": {
+          "DoctorWho": {
+            "$ref": "#/components/schemas/sendmessage_DoctorWho"
+          },
+          "message": {
+            "type": "string",
+            "example": "GERONIMO"
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "Dalec": {
+            "type": "string",
+            "example": "I dead"
+          }
+        }
+      }
+    }
+  }
+}

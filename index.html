@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Doctor Who API UI</title>
+  <style>
+    /* Simple styling for the button and screen */
+    #api-screen {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #000;
+      margin-top: 20px;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    #api-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #api-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Add the shake animation */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-10px); }
+      100% { transform: translateX(10px); }
+    }
+
+    /* Image of screwdriver that will shake */
+    #screwdriver {
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      transition: transform 0.5s ease;
+    }
+
+    /* When shaking */
+    .shake {
+      animation: shake 0.5s ease 0s infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Button to trigger API action -->
+  <button id="api-button">Shake Screwdriver</button>
+
+  <!-- Screwdriver image -->
+  <img id="screwdriver" src="data:image/jpeg;base64,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" alt="Sonic Screwdriver">
+
+  <!-- Screen area to display data -->
+  <div id="api-screen">
+    <p>Data will be displayed here...</p>
+  </div>
+
+  <script>
+    // Example button click event to fetch data
+    document.getElementById('api-button').addEventListener('click', function() {
+      // Show the "shaking" animation on the screwdriver
+      const screwdriver = document.getElementById('screwdriver');
+      screwdriver.classList.add('shake');
+
+      // Prepare the request body as per the API spec
+      const requestBody = {
+        DoctorWho: {
+          toolName: "Sonic Screwdriver",
+          action: "Shake",
+          status: "Activated"
+        },
+        message: "GERONIMO"
+      };
+
+      // Display "GERONIMO" message on the screen
+      const screen = document.getElementById('api-screen');
+      screen.innerHTML = "<p>GERONIMO!</p>";
+
+      // After 2 seconds (to simulate the shake), make the API request
+      setTimeout(() => {
+        // Perform the API request
+        fetch('https://virtserver.swaggerhub.com/KoraRiko/DoctorWho/1.0.0/send-message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody)
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Stop the shaking animation and show the response
+          screwdriver.classList.remove('shake');
+          screen.innerHTML = `<p>Dalec Response: ${data.Dalec}</p>`;
+        });
+      }, 2000); // Wait 2 seconds to simulate shaking before making the API request
+    });
+  </script>
+</body>
+</html>
